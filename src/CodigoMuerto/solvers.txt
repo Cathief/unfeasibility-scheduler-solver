@@ -1,0 +1,88 @@
+
+    /**
+     * Método que resuelve en función de las lexicográficas
+     */
+    public void solveLexGraph(){
+        //Mientras que haya energía disponible
+        int mt = getMachines().size();
+        int jt = getNonScheduledJobs().size();
+
+        //Para la asignación
+        int max;
+        int index;
+        JobInterface job;
+        Machine machine;
+
+        //Mientras tengamos energía:
+        while (sMaster.obtainTotalEnergy() < energyMax){
+            //Por cada uno de los trabajos
+            for (int ji = 0; ji<jt; ji++){
+                max = Integer.MAX_VALUE;
+                index = -1;
+                job = this.nonScheduledJobs.get(ji);
+
+                //Buscamos en qué máquina es más eficiente y schedulamos.
+                for (int mi = 0; mi<mt; mi++){
+                    if (job.getEnergyConsumption().get(mi) < max){
+                        index = mi;
+                        max = job.getEnergyConsumption().get(mi);
+                    }
+                }
+
+                //Tras analizar la máquina:
+                if (max != -1) {
+                    int newMakespan = schedule(machines.get(index), job);
+                    if (newMakespan>makespan) {
+                        this.makespan = newMakespan;
+                        for(Schedule ms: schedules)
+                            ms.updateMakespan(newMakespan);
+                    }
+                }
+            }
+        }
+        System.out.println("Planificado");
+    }
+
+    /**
+     * Método que da una planificación máximal de forma no determinista
+     */
+    public void solveRandom(){
+        //Mientras que haya energía disponible
+        int mt = machines.size();
+        int jt = this.nonScheduledJobs.size();
+
+        //Para la asignación
+        int max;
+        int index;
+        JobInterface job;
+        Machine machine;
+        while (energyCurrent<energyMax){
+            //Por cada uno de los trabajos
+            for (int ji = 0; ji<jt; ji++){
+                max = Integer.MAX_VALUE;
+                index = -1;
+                //Escogemos el trabajo al azar:
+                int rBound = this.nonScheduledJobs.size();
+                Random r = new Random();
+                job = this.nonScheduledJobs.get(r.nextInt(rBound));
+
+                //Buscamos en qué máquina es más eficiente y schedulamos.
+                for (int mi = 0; mi<mt; mi++){
+                    if (job.getEnergyConsumption().get(mi) < max){
+                        index = mi;
+                        max = job.getEnergyConsumption().get(mi);
+                    }
+                }
+                //Tras analizar la máquina:
+                if (max != -1) {
+                    int newMakespan = schedule(machines.get(index), job);
+                    if (newMakespan>makespan) {
+                        this.makespan = newMakespan;
+                        for(Schedule ms: schedules)
+                            ms.updateMakespan(newMakespan);
+                    }
+                }
+            }
+        }
+        System.out.println("Planificado");
+    }

@@ -1,0 +1,10 @@
+Problem Instance,C:\Users\Xurde\IdeaProjects\TFM_Scheduling\Instances\i_30_3_1.dzn
+Machines size,3,Jobs size,2
+Selected jobs,2
+Max energy,10000
+Non selected jobs,0
+Passive Energy,1440
+Active Energy,8790
+Makespan,96
+Completion time,5
+Machine Heuristic,Random selection

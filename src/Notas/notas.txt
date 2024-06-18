@@ -1,0 +1,16 @@
+1 - Ordenas los trabajos - P ej: Normas de prioridad
+2 - Seleccionar un trabajo siguiendo un criterio variable - P ej: Siguiendo una métrica
+3 - Guiar la selección de una máquina mediante heurístico - Round robin
+4 - Establecer criterios para parar la busqueda - Cota de la energía...
+
+------
+
+Lista de tareas:
+ - Añadir esquema de pesos en las tareas.
+ - Script para guardar los resultados en formato csv.
+    - Indice de trabajo planificado, indice de trabajo no.
+    - Tiempo de inicio máquina.
+    - Métricas relativas a la planificación.
+
+ - Implementar algunas heurísticas sencillas
+    - Medir el rendimiento.
